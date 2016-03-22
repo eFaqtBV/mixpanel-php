@@ -5,14 +5,13 @@
  * debugging and logging functionality. It also serves to persist $_options across the library.
  *
  */
-class Base_MixpanelBase {
-
-
+class Base_MixpanelBase
+{
     /**
      * Default options that can be overridden via the $options constructor arg
      * @var array
      */
-    private $_defaults = array(
+    protected $_defaults = array(
         "max_batch_size"    => 50, // the max batch size Mixpanel will accept is 50,
         "max_queue_size"    => 1000, // the max num of items to hold in memory before flushing
         "debug"             => false, // enable/disable debug mode
@@ -31,7 +30,6 @@ class Base_MixpanelBase {
      */
     protected $_options = array();
 
-
     /**
      * Construct a new MixpanelBase object and merge custom options with defaults
      * @param array $options
@@ -40,7 +38,6 @@ class Base_MixpanelBase {
         $options = array_merge($this->_defaults, $options);
         $this->_options = $options;
     }
-
 
     /**
      * Log a message to PHP's error log
@@ -53,7 +50,6 @@ class Base_MixpanelBase {
         error_log ( "[ $class - line $line ] : " . $msg );
     }
 
-
     /**
      * Returns true if in debug mode, false if in production mode
      * @return bool
@@ -61,5 +57,4 @@ class Base_MixpanelBase {
     protected function _debug() {
         return array_key_exists("debug", $this->_options) && $this->_options["debug"] == true;
     }
-
 }
